@@ -25,11 +25,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (baseUrl.includes('/edit')) baseUrl = baseUrl.split('/edit')[0] + '/pubhtml';
     if (baseUrl.includes('single=true')) baseUrl = baseUrl.replace('single=true', 'single=false');
 
-    // ── Resolve GID from env ─────────────────────────────────────────────────
+    // ── Resolve GID from env with robust defaults ────────────────────────────
     let rawGid = '';
-    if (category === 'GOLD') rawGid = process.env.VITE_GID_GOLD || '';
-    else if (category === 'INDICES') rawGid = process.env.VITE_GID_INDICES || '';
-    else rawGid = process.env.VITE_GID_FOREX || '';
+    if (category === 'GOLD') rawGid = process.env.VITE_GID_GOLD || '367925493';
+    else if (category === 'INDICES') rawGid = process.env.VITE_GID_INDICES || '1646006487';
+    else rawGid = process.env.VITE_GID_FOREX || '1303016074';
 
     const targetGid = (rawGid.match(/\d+/) || [rawGid])[0].trim();
 
